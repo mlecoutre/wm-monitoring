@@ -1,0 +1,76 @@
+<div class=" mdl-card mdl-shadow--2dp search-card-wide">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Search panel</h2>
+  </div>
+
+
+  <div class="mdl-card__supporting-text">
+   <form action="#">
+<!-- tabs -->
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+  <div class="mdl-tabs__tab-bar">
+      <a href="#functional-panel" class="mdl-tabs__tab is-active">Funtional</a>
+      <a href="#time-panel" class="mdl-tabs__tab">Time settings</a>
+      <a href="#targaryens-panel" class="mdl-tabs__tab">Advanced</a>
+  </div>
+
+  <div class="mdl-tabs__panel is-active" id="functional-panel">
+  <div class="mdl-textfield mdl-js-textfield">
+    <input class="mdl-textfield__input" [(ngModel)]="search.functionalId" name="functionalId" type="text" id="functionalId">
+    <label class="mdl-textfield__label" for="functionalId">Functional ID</label>
+  </div>
+
+    <div class="mdl-textfield mdl-js-textfield">
+    <input class="mdl-textfield__input" [(ngModel)]="search.correlationID" name="correlationID" type="text" id="correlationID">
+    <label class="mdl-textfield__label" for="correlationID">Correlation ID</label>
+    </div>
+    <div>
+      <label>Status</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect  search-radio" for="option-1">
+  <input type="radio" id="option-1" class="mdl-radio__button" [(ngModel)]="search.status" name="status" value=" " checked>
+  <span class="mdl-radio__label">All</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect  search-radio" for="option-2">
+  <input type="radio" id="option-2" class="mdl-radio__button" [(ngModel)]="search.status"  name="status" value="Fail">
+  <span class="mdl-radio__label">Fail</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect  search-radio" for="option-3">
+  <input type="radio" id="option-3" class="mdl-radio__button" [(ngModel)]="search.status"  name="status" value="Success">
+  <span class="mdl-radio__label">Success</span>
+</label>
+  </div>
+  </div>
+  <div class="mdl-tabs__panel" id="time-panel">
+    <ul>
+      <li>Tywin</li>
+      <li>Cersei</li>
+      <li>Jamie</li>
+      <li>Tyrion</li>
+    </ul>
+  </div>
+  <div class="mdl-tabs__panel" id="targaryens-panel">
+      <div class="mdl-textfield mdl-js-textfield">
+    <input class="mdl-textfield__input" type="text" [(ngModel)]="search.nbElements" name="nbElements" id="nbElements" >
+    <label class="mdl-textfield__label" for="nbElements">Number of Elements</label>
+  </div>
+
+  </div>
+</div>
+
+</form>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      Search
+    </a>
+
+     <a (click)="onReset()" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      Reset
+    </a>
+  </div>
+  <div class="mdl-card__menu">
+    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+      <i class="material-icons">share</i>
+    </button>
+  </div>
+</div>

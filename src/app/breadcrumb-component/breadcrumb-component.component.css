@@ -1,0 +1,18 @@
+.breadcrumb {
+    padding: 4px 4px;
+    margin-bottom: 2px;
+    background-color: #f5f5f5;
+    border-radius: 2px;
+}
+li {
+    display: inline-block;
+    padding: 5px 5px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.breadcrumb>li+li:before {
+    padding: 0 2px;
+    color: #ccc;
+    content: "/\00a0";
+}

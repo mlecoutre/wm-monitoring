@@ -1,0 +1,13 @@
+
+		<ol class="breadcrumb">
+			<li><a (click)="onReloadBreadcrumb()"><i class="material-icons">cached</i></a></li>
+			<li><a
+				ng-click="showDomain(selectedPlatform)">{{selector.platform}}</a></li>
+			<li ng-show="selectedDomain != null"
+				ng-click="showPEs(selectedDomain)"><a>
+					{{selector.domain}}</a></li>
+			<li ng-show="selectedPE != null" ng-click="showFlows(selectedPE)"><a>{{selector.pe}}</a></li>
+			<li ng-show="selectedFlow != null"><a>{{selector.md}}</a></li>
+		</ol>
+
+

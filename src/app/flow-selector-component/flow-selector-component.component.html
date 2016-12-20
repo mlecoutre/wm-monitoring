@@ -1,0 +1,60 @@
+
+<!-- PLATFORM SELECTION -->
+<div *ngIf="selectedPlatform == null">
+  <ul>
+    <li *ngFor="let pf of platforms"  class="mdl-list__item pelement">
+    <span class="mdl-list__item-primary-content">
+      <i class="material-icons  mdl-list__item-avatar">explore</i>
+      <a (click)="onPlatformSelected(pf)" href="#">{{pf.name}}</a>
+    </span>
+    <span class="mdl-list__item-secondary-action">
+
+    </span>
+      </li>
+  </ul>
+</div>
+
+<!-- DOMAIN SELECTION -->
+<div *ngIf="selectedPlatform != null && selectedDomain == null">
+  <ul>
+    <li *ngFor="let d of selectedPlatform.domain"  class="mdl-list__item pelement">
+    <span class="mdl-list__item-primary-content">
+      <i class="material-icons  mdl-list__item-avatar">settings</i>
+      <a (click)="onDomainSelected(d)" href="#">{{d.name}}</a>
+    </span>
+    <span class="mdl-list__item-secondary-action">
+      
+    </span>
+      </li>
+  </ul>
+</div>
+
+<!-- PE SELECTION -->
+<div *ngIf="selectedDomain != null && selectedPE == null">
+  <ul>
+    <li *ngFor="let p of selectedDomain.pe"  class="mdl-list__item pelement">
+    <span class="mdl-list__item-primary-content">
+      <i class="material-icons  mdl-list__item-avatar">settings</i>
+      <a (click)="onPeSelected(p)" href="#">{{p.name}}</a>
+    </span>
+    <span class="mdl-list__item-secondary-action">
+      {{p.description}}
+    </span>
+      </li>
+  </ul>
+</div>
+
+<!-- MD SELECTION -->
+<div *ngIf="selectedPE != null">
+  <ul>
+    <li *ngFor="let f of selectedPE.flux"  class="mdl-list__item pelement">
+    <span class="mdl-list__item-primary-content">
+      <i class="material-icons  mdl-list__item-avatar">settings</i>
+      <a (click)="onFlowSelected(f)" href="#">{{f.name}}</a>
+    </span>
+    <span class="mdl-list__item-secondary-action">
+      {{f.description}}
+    </span>
+      </li>
+  </ul>
+</div>
