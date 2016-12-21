@@ -1,7 +1,6 @@
 
-<!-- <app-my-tst-component></app-my-tst-component>> -->
 <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--4-col"><app-breadcrumb-component></app-breadcrumb-component></div>
+  <div class="mdl-cell mdl-cell--4-col"><app-breadcrumb-component [platformName]="platformName" [domainName]="domainName" [peName]="peName" [flowName]="flowName"></app-breadcrumb-component></div>
   <div class="mdl-cell mdl-cell--8-col"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
   Search
 </button>
@@ -10,6 +9,7 @@
 </button>
 </div>
 </div>
+
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--4-col"><app-search-component></app-search-component></div>
   <div class="mdl-cell mdl-cell--8-col">

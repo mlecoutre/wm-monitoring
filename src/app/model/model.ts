@@ -30,5 +30,17 @@
         platform: Platform[];
     }
 
+    export class Selector {
+        
+        constructor(){}
+
+        platformName: string;
+        domainName: string;
+        peName: string;
+        flowName: string;
+        status: string;
+        nbElements: string;
+    }
+
 
 
