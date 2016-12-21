@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as model from './model/model'
 import {PlatformsService} from './services/platforms.service'
+import * as breadcrumbEvent from './breadcrumb-component/breadcrumb-event'
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,13 @@ import {PlatformsService} from './services/platforms.service'
 })
 export class AppComponent implements OnInit {
  
-  
+  //These fields are binded to the breadcrumb
   platformName: string ="";
   domainName: string="";
   peName: string="";
   flowName: string="";
 
+  breadcrumbEvent: breadcrumbEvent.EventType;
 
   ngOnInit() {
     console.log("init APP!");
@@ -25,7 +27,6 @@ export class AppComponent implements OnInit {
 /********************************************
  *  Retrieve events from Flow Selector panel
  ********************************************/ 
-
   onPlatformName(platformName: string){
     console.log("AppComponent: get event onPlatformName :"+platformName);
     this.platformName = platformName;
@@ -46,4 +47,11 @@ export class AppComponent implements OnInit {
     this.flowName = flowName;
   }
 
+/********************************************
+ *  Retrieve events from BreadCrumb panel
+ ********************************************/ 
+  onBreadcrumbEvent(breadcrumbEvent: breadcrumbEvent.EventType){
+    console.log("AppComponent: get event on BreadCrumb "+ JSON.stringify(breadcrumbEvent));
+    this.breadcrumbEvent = breadcrumbEvent;
+  }
 }

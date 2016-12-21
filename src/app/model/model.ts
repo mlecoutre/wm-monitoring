@@ -32,12 +32,18 @@
 
     export class Selector {
         
-        constructor(){}
+        constructor(){
+            
+            this.platformName = null;
+            this.domainName = null;
+            this.peName = null;
+            this.flowName = null;
+        }
 
-        platformName: string;
-        domainName: string;
-        peName: string;
-        flowName: string;
+        platformName: string = null;
+        domainName: string = null;
+        peName: string = null;
+        flowName: string = null;
         status: string;
         nbElements: string;
     }

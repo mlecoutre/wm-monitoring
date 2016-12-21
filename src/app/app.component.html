@@ -1,6 +1,10 @@
 
 <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--4-col"><app-breadcrumb-component [platformName]="platformName" [domainName]="domainName" [peName]="peName" [flowName]="flowName"></app-breadcrumb-component></div>
+  <div class="mdl-cell mdl-cell--4-col">
+    <app-breadcrumb-component [platformName]="platformName" [domainName]="domainName" [peName]="peName" [flowName]="flowName" (onBreadcrumbEvent)="onBreadcrumbEvent($event)">
+
+    </app-breadcrumb-component>
+  </div>
   <div class="mdl-cell mdl-cell--8-col"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
   Search
 </button>
@@ -13,7 +17,7 @@
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--4-col"><app-search-component></app-search-component></div>
   <div class="mdl-cell mdl-cell--8-col">
-    <app-flow-selector-component (onPlatformName)="onPlatformName($event)" (onDomainName)="onDomainName($event)" (onPeName)="onPeName($event)" (onFlowName)="onFlowName($event)" >
+    <app-flow-selector-component [breadcrumbEvent]="breadcrumbEvent" (onPlatformName)="onPlatformName($event)" (onDomainName)="onDomainName($event)" (onPeName)="onPeName($event)" (onFlowName)="onFlowName($event)" >
     </app-flow-selector-component>
   </div>
 </div>
