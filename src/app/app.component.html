@@ -5,7 +5,7 @@
 
     </app-breadcrumb-component>
   </div>
-  <div class="mdl-cell mdl-cell--8-col"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+  <div class="mdl-cell mdl-cell--8-col"><button (click)="onSearchInstances()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
   Search
 </button>
 <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
@@ -20,5 +20,11 @@
     <app-flow-selector-component [breadcrumbEvent]="breadcrumbEvent" (onPlatformName)="onPlatformName($event)" (onDomainName)="onDomainName($event)" (onPeName)="onPeName($event)" (onFlowName)="onFlowName($event)" >
     </app-flow-selector-component>
   </div>
+</div>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col"><app-processes-component>
+    
+    </app-processes-component></div>
+ 
 </div>
 

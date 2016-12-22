@@ -17,13 +17,22 @@ export class FlowSelectorComponentComponent implements OnInit {
   selectedPE: model.Pe;
   selectedMd: model.Flux;
 
+  /******************************************
+   * Trigger breadcrumb event
+   ******************************************/
   @Input()
   set breadcrumbEvent(receiveBreadcrumbEvent: breadcrumbEvent.EventType) {
     if( receiveBreadcrumbEvent == null)
       return;
 
     console.log("FlowSelectorComponentComponent - receive  breadcrumbEvent");
-    if(breadcrumbEvent.click_platform == receiveBreadcrumbEvent.getEventType()){
+    if(breadcrumbEvent.click_reload == receiveBreadcrumbEvent.getEventType()){
+        console.log("FlowSelectorComponentComponent - RELOAD");
+        this.selectedPlatform = null;
+        this.selectedDomain = null;
+        this.selectedPE = null;
+        this.selectedMd = null;
+    }else if(breadcrumbEvent.click_platform == receiveBreadcrumbEvent.getEventType()){
         console.log("FlowSelectorComponentComponent - Platform filter on receiveBreadcrumbEvent.selector.platformName");
         let res =  this.platforms.filter(platform=>{return platform.name == receiveBreadcrumbEvent.selector.platformName})
         this.selectedPlatform = res[0];
@@ -38,7 +47,7 @@ export class FlowSelectorComponentComponent implements OnInit {
         this.selectedMd = null;
 
     }else if(breadcrumbEvent.click_pe == receiveBreadcrumbEvent.getEventType()){
-          console.log("FlowSelectorComponentComponent - Platform filter on receiveBreadcrumbEvent.selector.platformName");
+        console.log("FlowSelectorComponentComponent - Platform filter on receiveBreadcrumbEvent.selector.platformName");
         let res =  this.selectedDomain.pe.filter(pe=>{return pe.name == receiveBreadcrumbEvent.selector.peName})
         this.selectedPE = res[0];
         this.selectedMd = null;
@@ -55,9 +64,7 @@ export class FlowSelectorComponentComponent implements OnInit {
   @Output() onFlowName = new EventEmitter<string>();
 
   constructor( private platformsService: PlatformsService ) {
-    console.log('FlowSelectorComponentComponent construct');
-    
-    
+    console.log('FlowSelectorComponentComponent construct'); 
    }
 
    /**
