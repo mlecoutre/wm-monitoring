@@ -5,7 +5,11 @@
 
     </app-breadcrumb-component>
   </div>
-  <div class="mdl-cell mdl-cell--8-col"><button (click)="onSearchInstances()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+  <div class="mdl-cell mdl-cell--8-col">
+    <button (click)="onParameters()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+  Parameters
+</button>
+    <button (click)="onSearchInstances()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
   Search
 </button>
 <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
@@ -15,13 +19,13 @@
 </div>
 
 <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--4-col"><app-search-component></app-search-component></div>
-  <div class="mdl-cell mdl-cell--8-col">
+  <div *ngIf="isSearchPanelDisplayed" class="mdl-cell mdl-cell--4-col"><app-search-component></app-search-component></div>
+  <div *ngIf="isFlowSelectorPanelDisplayed" class="mdl-cell mdl-cell--8-col">
     <app-flow-selector-component [breadcrumbEvent]="breadcrumbEvent" (onPlatformName)="onPlatformName($event)" (onDomainName)="onDomainName($event)" (onPeName)="onPeName($event)" (onFlowName)="onFlowName($event)" >
     </app-flow-selector-component>
   </div>
 </div>
-<div class="mdl-grid">
+<div *ngIf="isProcessesPanelDisplayed" class="mdl-grid">
   <div class="mdl-cell mdl-cell--12-col"><app-processes-component>
     
     </app-processes-component></div>

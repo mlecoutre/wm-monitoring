@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import * as model from './model/model'
 import {PlatformsService} from './services/platforms.service'
-import * as breadcrumbEvent from './breadcrumb-component/breadcrumb-event'
+import * as breadcrumbEventModel from './breadcrumb-component/breadcrumb-event'
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,12 @@ export class AppComponent {
   flowName: string;
 
   // this fiel is binded to the flow selector panel
-  breadcrumbEvent: breadcrumbEvent.EventType;
+  breadcrumbEvent: breadcrumbEventModel.EventType;
+
+  //manage status of components and initial state
+  isSearchPanelDisplayed = false;
+  isFlowSelectorPanelDisplayed = true;
+  isProcessesPanelDisplayed = false;
 
 /********************************************
  *  Retrieve events from Flow Selector panel
@@ -47,9 +52,22 @@ export class AppComponent {
 /********************************************
  *  Retrieve events from BreadCrumb panel
  ********************************************/ 
-  onBreadcrumbEvent(breadcrumbEvent: breadcrumbEvent.EventType){
+  onBreadcrumbEvent(breadcrumbEvent: breadcrumbEventModel.EventType){
     console.log("AppComponent: get event on BreadCrumb "+ JSON.stringify(breadcrumbEvent));
     this.breadcrumbEvent = breadcrumbEvent;
+
+    if(breadcrumbEvent.eventType == breadcrumbEventModel.click_reload){
+      this.isSearchPanelDisplayed = false;
+      this.isFlowSelectorPanelDisplayed = true;
+      this.isProcessesPanelDisplayed = false;
+    }
+  }
+
+  onParameters(){
+    console.log("AppComponent: search instances");
+    this.isSearchPanelDisplayed =   !this.isSearchPanelDisplayed;
+    this.isFlowSelectorPanelDisplayed = false;
+    this.isProcessesPanelDisplayed = false;
   }
 
   /**
@@ -57,6 +75,9 @@ export class AppComponent {
    */
   onSearchInstances(){
     console.log("AppComponent: search instances");
+    this.isSearchPanelDisplayed = false;
+    this.isFlowSelectorPanelDisplayed = false;
+    this.isProcessesPanelDisplayed = true;
   }
 
 

@@ -10,6 +10,7 @@ import * as modelp from './processes-model';
 })
 export class ProcessesComponentComponent implements OnInit {
 
+  //@TODO replace by a call to the processes service
   MOCK_INSTANCES : modelp.Processes = require('../mocks/MockProcesses.json')
 
   public ngOnInit():void {
