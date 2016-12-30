@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
-import { TableData } from './table-data';
+import { ProcessesService } from '../services/processes.service';
 import * as modelp from './processes-model';
 
 @Component({
@@ -10,66 +10,74 @@ import * as modelp from './processes-model';
 })
 export class ProcessesComponentComponent implements OnInit {
 
-  //@TODO replace by a call to the processes service
-  MOCK_INSTANCES : modelp.Processes = require('../mocks/MockProcesses.json')
+  instances: modelp.Process[];
 
-  public ngOnInit():void {
-    
-    this.onChangeTable(this.config);
+  public constructor(private processesService: ProcessesService) {
+    this.instances= null;
+    this.length = 0;
+  }
+
+  public ngOnInit(): void {
+    this.processesService.getProcesses().then(
+      p => {
+        this.instances = p.processes;
+        this.data = p.processes;
+        this.length = this.instances.length;
+        this.onChangeTable(this.config);
+      }
+    );
+
   }
 
   /**
    * MANAGE TABLE
    */
-  public rows:Array<any> = [];
-  public columns:Array<any> = [
-    {title: 'PE', className: ['office-header', 'text-success'], name: 'pe_', sort: 'asc'},
-    {title: 'Flow', name: 'flux_', sort: ''},
-    {title: 'Status', className: 'text-warning', name: 'status_'},
-    {title: 'functionalIDName', name: 'functionalIDName'},
-    {title: 'functionalIDValue', name: 'functionalIDValue'},
-    {title: 'lastDatetime', name: 'lastDatetime'},
-    {title: 'traceCount', name: 'traceCount'}
+  public rows: Array<any> = [];
+  public columns: Array<any> = [
+    { title: 'PE', className: ['office-header', 'text-success'], name: 'pe_', sort: 'asc' },
+    { title: 'Flow', name: 'flux_', sort: '' },
+    { title: 'Status', className: 'text-warning', name: 'status_' },
+    { title: 'functionalIDName', name: 'functionalIDName' },
+    { title: 'functionalIDValue', name: 'functionalIDValue' },
+    { title: 'lastDatetime', name: 'lastDatetime' },
+    { title: 'traceCount', name: 'traceCount' }
   ];
-  public page:number = 1;
-  public itemsPerPage:number = 10;
-  public maxSize:number = 5;
-  public numPages:number = 1;
-  public length:number = 0;
+  public page: number = 1;
+  public itemsPerPage: number = 10;
+  public maxSize: number = 5;
+  public numPages: number = 1;
+  public length: number = 0;
 
-  public config:any = {
+  public config: any = {
     paging: true,
-    sorting: {columns: this.columns},
-    filtering: {filterString: ''},
-    className: ['mdl-data-table', 'mdl-js-data-table',  'mdl-shadow--2dp']
+    sorting: { columns: this.columns },
+    filtering: { filterString: '' },
+    className: ['mdl-data-table', 'mdl-js-data-table', 'mdl-shadow--2dp']
   };
 
-/**
- * HERE IS THE INPUTS OF THE TABLE
- */
-  private data:Array<any> =  this.MOCK_INSTANCES.processes;
+  /**
+   * HERE IS THE INPUTS OF THE TABLE
+   */
+  private data: Array<any> = this.instances;
   //TableData;
 
-  public constructor() {
-    this.length = this.data.length;
-  }
 
 
 
-  public changePage(page:any, data:Array<any> = this.data):Array<any> {
+  public changePage(page: any, data: Array<any> = this.data): Array<any> {
     let start = (page.page - 1) * page.itemsPerPage;
     let end = page.itemsPerPage > -1 ? (start + page.itemsPerPage) : data.length;
     return data.slice(start, end);
   }
 
-  public changeSort(data:any, config:any):any {
+  public changeSort(data: any, config: any): any {
     if (!config.sorting) {
       return data;
     }
 
     let columns = this.config.sorting.columns || [];
-    let columnName:string = void 0;
-    let sort:string = void 0;
+    let columnName: string = void 0;
+    let sort: string = void 0;
 
     for (let i = 0; i < columns.length; i++) {
       if (columns[i].sort !== '' && columns[i].sort !== false) {
@@ -83,7 +91,7 @@ export class ProcessesComponentComponent implements OnInit {
     }
 
     // simple sorting
-    return data.sort((previous:any, current:any) => {
+    return data.sort((previous: any, current: any) => {
       if (previous[columnName] > current[columnName]) {
         return sort === 'desc' ? -1 : 1;
       } else if (previous[columnName] < current[columnName]) {
@@ -93,11 +101,11 @@ export class ProcessesComponentComponent implements OnInit {
     });
   }
 
-  public changeFilter(data:any, config:any):any {
-    let filteredData:Array<any> = data;
-    this.columns.forEach((column:any) => {
+  public changeFilter(data: any, config: any): any {
+    let filteredData: Array<any> = data;
+    this.columns.forEach((column: any) => {
       if (column.filtering) {
-        filteredData = filteredData.filter((item:any) => {
+        filteredData = filteredData.filter((item: any) => {
           return item[column.name].match(column.filtering.filterString);
         });
       }
@@ -108,14 +116,14 @@ export class ProcessesComponentComponent implements OnInit {
     }
 
     if (config.filtering.columnName) {
-      return filteredData.filter((item:any) =>
+      return filteredData.filter((item: any) =>
         item[config.filtering.columnName].match(this.config.filtering.filterString));
     }
 
-    let tempArray:Array<any> = [];
-    filteredData.forEach((item:any) => {
+    let tempArray: Array<any> = [];
+    filteredData.forEach((item: any) => {
       let flag = false;
-      this.columns.forEach((column:any) => {
+      this.columns.forEach((column: any) => {
         if (item[column.name].toString().match(this.config.filtering.filterString)) {
           flag = true;
         }
@@ -129,7 +137,7 @@ export class ProcessesComponentComponent implements OnInit {
     return filteredData;
   }
 
-  public onChangeTable(config:any, page:any = {page: this.page, itemsPerPage: this.itemsPerPage}):any {
+  public onChangeTable(config: any, page: any = { page: this.page, itemsPerPage: this.itemsPerPage }): any {
     if (config.filtering) {
       Object.assign(this.config.filtering, config.filtering);
     }

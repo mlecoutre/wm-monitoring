@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { SearchComponentComponent } from './search-component/search-component.component';
 import { BreadcrumbComponentComponent } from './breadcrumb-component/breadcrumb-component.component';
 import { PlatformsService } from './services/platforms.service';
+import {ProcessesService} from './services/processes.service';
 import { FlowSelectorComponentComponent } from './flow-selector-component/flow-selector-component.component';
 import { ProcessesComponentComponent } from './processes-component/processes-component.component'
 
