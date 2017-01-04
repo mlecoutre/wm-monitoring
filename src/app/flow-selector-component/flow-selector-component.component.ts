@@ -62,6 +62,7 @@ export class FlowSelectorComponentComponent implements OnInit {
   @Output() onDomainName = new EventEmitter<string>();
   @Output() onPeName = new EventEmitter<string>();
   @Output() onFlowName = new EventEmitter<string>();
+  errorMessage: string ;
 
   constructor( private platformsService: PlatformsService ) {
     console.log('FlowSelectorComponentComponent construct'); 
@@ -72,8 +73,12 @@ export class FlowSelectorComponentComponent implements OnInit {
     */
   ngOnInit() {
     console.log("Init Flow-selector-component");
-    this.platformsService.getPlatforms()
-      .then(ro => this.platforms =  ro.platform);
+    this.platformsService.getPlatforms().subscribe(ro => 
+
+    {
+      console.log(">> "+ro.length);
+      this.platforms =  ro;}
+    , error =>  this.errorMessage = <any>error);
   }
 
   onPlatformSelected(pf: model.Platform){
