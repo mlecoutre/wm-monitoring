@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import * as model from '../model/model';
 
 import { Http, Response } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 // MOCK
-import { PLATFORMS } from '../mocks/PlatformsMock'
+//import { PLATFORMS } from '../mocks/PlatformsMock'
 
 @Injectable()
 export class PlatformsService {
@@ -28,8 +28,7 @@ export class PlatformsService {
     return body.platform || {};
   }
 
-
-    private handleError (error: Response | any) {
+  private handleError(error: Response | any) {
     // In a real world app, we might use a remote logging infrastructure
     let errMsg: string;
     if (error instanceof Response) {

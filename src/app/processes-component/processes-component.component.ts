@@ -11,22 +11,26 @@ import * as modelp from './processes-model';
 export class ProcessesComponentComponent implements OnInit {
 
   instances: modelp.Process[];
+  errorMessage: string;
 
   public constructor(private processesService: ProcessesService) {
-    this.instances= null;
+    this.instances = null;
     this.length = 0;
   }
 
   public ngOnInit(): void {
-    this.processesService.getProcesses().then(
+    //  this.platformsService.getPlatforms().subscribe(ro => this.platforms = ro, error => this.errorMessage = <any>error);
+    //@TODO linked to the user selection.
+    var pr = new modelp.ProcessRequest('50', '2017-01-04T23:00:31.128Z', '2017-01-02T13:12:31.140Z', '2017-01-05T22:59:31.128Z', '2017-01-05T13:12:31.140Z', 'ALISE', 'MD320', 'PE63', 'ESB_OPE');
+
+    this.processesService.getProcesses(pr).subscribe(
       p => {
-        this.instances = p.processes;
-        this.data = p.processes;
+        this.instances = p;
+        this.data = p;
         this.length = this.instances.length;
         this.onChangeTable(this.config);
-      }
+      }, error => this.errorMessage = <any>error
     );
-
   }
 
   /**

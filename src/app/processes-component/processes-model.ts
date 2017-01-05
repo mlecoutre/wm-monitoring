@@ -19,3 +19,33 @@ export interface Processes {
     queryTime: number;
 }
 
+export class ProcessRequest {
+    /*
+    constructor(){
+
+     }
+     */
+
+    constructor(maxProcesses: string, beginHour: string, beginDate: string, endHour: string,
+        endDate: string, domain: string, flux: string, pe: string, platform: string) {
+        this.maxProcesses = maxProcesses;
+        this.pe = pe;
+        this.beginDate = beginDate;
+        this.beginHour = beginHour;
+        this.endDate = endDate;
+        this.endHour = endHour;
+        this.domain = domain;
+        this.flux = flux;
+        this.platform = platform;
+    }
+
+    maxProcesses: string;
+    beginHour: string;
+    beginDate: string;
+    endHour: string;
+    endDate: string;
+    domain: string;
+    flux: string;
+    pe: string;
+    platform: string;
+}
